@@ -26,13 +26,13 @@ for item in item_tags:
 #Дальше надо узнать сколько всего страниц и распарсить оставшиеся со 2 по n
 #Находим на первой странице блок с ссылкой на последнюю страницу
 last_page = soup.find_all('a', title='Последняя страница')
-#Получаем часть урл последней страницв
+#Получаем часть урл последней страницы
 link_last_page = ''
 for i in last_page:
     link_last_page = i.get('href')
     #print(link_last_page)
 
-#gолучаем кол-во страниц
+#получаем кол-во страниц
 q_pages = re.search(r'\d+', link_last_page)
 count_pages = int(q_pages.group(0))
 #print(type(count_pages), count_pages)
