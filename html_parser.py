@@ -7,6 +7,7 @@ import json
 
 domain = 'https://habr.com'
 srch = 'ru/hub'
+#TODO: вводить/передавать хаб для парсинга
 tag = 'kubernetes'
 url = f'{domain}/{srch}/{tag}'
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"}
@@ -37,6 +38,7 @@ count_pages = int(q_pages.group(0))
 #print(type(count_pages), count_pages)
 
 #В цикле формируем урл каждой страницы, делаем запрос на каждую страницу, парсим вывод, дописываем результат в словарь
+#TODO: реализовать парсинг по датам с проверкой уникальности записей
 for i in tqdm(range(2, count_pages + 1)):
     currient_page_url = f'{domain}/{srch}/{tag}/page{i}'
     #print(currient_page_url)
@@ -50,7 +52,6 @@ for i in tqdm(range(2, count_pages + 1)):
         items[item_title] = item_link
     time.sleep(3)
 #print(items)
-
 with open('parse.json', 'w', encoding='utf-8') as f:
     json.dump(items, f, ensure_ascii=False)
 
